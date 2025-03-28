@@ -11,25 +11,27 @@ public class BookService {
 
     ArrayList<Book> books = new ArrayList<>();
 
+
     public ArrayList<Book> getBooks() {
         return books;
     }
 
-    public boolean addBook(Book book){
+    public String addBook(Book book){
         for (Book b: books){
             if (b.getId().equals(book.getId())){
-                return false;
+                return "id";
             }
         }
-        if (book.getPublicationDate().isBefore(LocalDate.of(2007,01,01)) && book.getIsbn().length()==10) {
+        LocalDate date = LocalDate.parse(book.getPublicationDate());
+        if (date.isBefore(LocalDate.of(2007,01,01)) && book.getIsbn().length()==10) {
             books.add(book);
-            return true;
+            return "10";
         }
-        if (book.getPublicationDate().isAfter(LocalDate.of(2007,01,01)) && book.getIsbn().length()==13){
+        if (date.isAfter(LocalDate.of(2007,01,01)) && book.getIsbn().length()==13){
             books.add(book);
-            return true;
+            return "13";
         }
-        return false;
+        return "";
     }
 
     public boolean updateBook(String id,Book book){
