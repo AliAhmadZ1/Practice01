@@ -37,4 +37,23 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Book is already exist.."));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Book doesn't match correct ISBN based on date"));
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateBook(@PathVariable String id,@RequestBody@Valid Book book,Errors errors){
+        if (errors.hasErrors()){
+            String message = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(message));
+        }
+        if (bookService.updateBook(id,book))
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Updated!!"));
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Not found"));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteBook(@PathVariable String id){
+        if (bookService.deleteBook(id))
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Deleted!!"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("not found"));
+    }
+
 }
