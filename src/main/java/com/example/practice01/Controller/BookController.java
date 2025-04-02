@@ -6,6 +6,7 @@ import com.example.practice01.Service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -53,6 +54,13 @@ public class BookController {
     public ResponseEntity deleteBook(@PathVariable String id){
         if (bookService.deleteBook(id))
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Deleted!!"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("not found"));
+    }
+
+    @PostMapping("/new-version/{id}")
+    public ResponseEntity newversion(@PathVariable String id){
+        if (bookService.newVersoin(id))
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("new version of your book is added"));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("not found"));
     }
 
