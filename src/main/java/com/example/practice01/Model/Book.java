@@ -24,7 +24,7 @@ public class Book {
     private String title;
     @NotEmpty(message = "Author cannot be empty")
     private String author;
-//    @NotEmpty(message = "Author cannot be empty")
+    @NotEmpty(message = "Author cannot be empty")
 //    @JsonFormat(pattern = "yyyy/MM/dd")
     private String publicationDate = "2007-05-01";
     @NotNull(message = "Price cannot be null")
