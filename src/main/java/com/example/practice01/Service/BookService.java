@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Service
 public class BookService {
@@ -53,5 +54,21 @@ public class BookService {
         }
         return false;
     }
+
+    public boolean newVersoin (String id) {
+        LocalDate date = LocalDate.now();
+        Random random = new Random();
+        int num = random.nextInt(13);
+        for (Book b : books) {
+            if (b.getId().equals(id)) {
+                Book b2 = new Book(b.getId() + "2", String.valueOf(num), b.getTitle() + " 2",
+                        b.getAuthor(), String.valueOf(date), b.getPrice());
+                books.add(b2);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
