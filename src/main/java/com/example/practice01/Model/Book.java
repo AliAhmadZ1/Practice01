@@ -30,5 +30,6 @@ public class Book {
     @NotNull(message = "Price cannot be null")
     @PositiveOrZero(message = "price shouldn't be negative")
     private double price;
+    private int version=1;
 
 }
