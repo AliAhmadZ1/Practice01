@@ -61,8 +61,8 @@ public class BookService {
         int num = random.nextInt(13);
         for (Book b : books) {
             if (b.getId().equals(id)) {
-                Book b2 = new Book(b.getId() + "2", String.valueOf(num), b.getTitle() + " 2",
-                        b.getAuthor(), String.valueOf(date), b.getPrice());
+                Book b2 = new Book(b.getId() + b.getVersion()+1, String.valueOf(num), b.getTitle() + " 2",
+                        b.getAuthor(), String.valueOf(date), b.getPrice(),b.getVersion()+1);
                 books.add(b2);
                 return true;
             }
