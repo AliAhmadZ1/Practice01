@@ -58,10 +58,11 @@ public class BookService {
     public boolean newVersoin (String id) {
         LocalDate date = LocalDate.now();
         Random random = new Random();
-        int num = random.nextInt(13);
+        int num = random.nextInt(1000000,9999999);
+        int num2 = random.nextInt(100000,999999);
         for (Book b : books) {
             if (b.getId().equals(id)) {
-                Book b2 = new Book(b.getId() + b.getVersion()+1, String.valueOf(num), b.getTitle() + " 2",
+                Book b2 = new Book(b.getId() + (b.getVersion()+1), String.valueOf(num)+String.valueOf(num2), b.getTitle() + " "+String.valueOf(b.getVersion()+1),
                         b.getAuthor(), String.valueOf(date), b.getPrice(),b.getVersion()+1);
                 books.add(b2);
                 return true;
